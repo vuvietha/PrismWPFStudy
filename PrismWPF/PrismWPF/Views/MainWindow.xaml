@@ -1,0 +1,26 @@
+﻿<Window x:Class="PrismWPF.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrismWPF.Views"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ContentControl Grid.Row="0" Margin="5" prism:RegionManager.RegionName="ToolbarRegion"/>
+        <ContentControl Grid.Row="1" Margin="5" prism:RegionManager.RegionName="OrderListRegion"/>
+        <ContentControl Grid.Row="2" Margin="5" prism:RegionManager.RegionName="UserListRegion"/>
+        <!--<Button Grid.Row="0" Content="Get Users in 3 tabs" Margin="10" Command="{Binding ApplicationCommands.CompositeCommand}"/>
+        <Button Grid.Row="1" Content="Delete Users" Margin="10" Command="{Binding ApplicationCommands.DeleteCommand}"/>
+        <TabControl Grid.Row="2" prism:RegionManager.RegionName="UserListRegion"/>-->
+        <!--<ContentControl prism:RegionManager.RegionName="LabListRegion"/>-->
+
+    </Grid>
+</Window>

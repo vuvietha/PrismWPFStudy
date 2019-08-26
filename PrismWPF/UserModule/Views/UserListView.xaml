@@ -1,0 +1,65 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:UserModule.Views"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:mvvm="http://prismlibrary.com/"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" 
+             x:Class="UserModule.Views.UserListView"
+             mvvm:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="800"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="User Manager" Grid.Row="0" FontSize="18"/>
+        <dx:SimpleButton Margin="5" Grid.Row="1" Command="{Binding GetUsersCommand}" Content="Get Users" Height="20" Width="80" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <dx:SimpleButton Grid.Row="1" Command="{Binding DeleteUsersCommand}" CommandParameter="{Binding SelectedUsers}" Content="Delete Users"  Height="20"   VerticalAlignment="Top" Margin="100,5,597,0"/>
+        <dx:SimpleButton Grid.Row="1" Command="{Binding SaveUsersCommand}" Content="Save Users"  Height="20"  VerticalAlignment="Top" Margin="218,5,496,0"/>
+        <dxg:GridControl Grid.Row="2" Width="800" Height="200"  
+                         ItemsSource="{Binding Users}" 
+                         SelectedItems="{Binding SelectedUsers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                         AutoGenerateColumns="AddNew" 
+                         EnableSmartColumnsGeneration="True" 
+                         HorizontalAlignment="Left" Margin="0,35,0,0" 
+                         VerticalAlignment="Top"
+                         SelectionMode="Row">
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="UserId">
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="FirstName">
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="LastName">
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="Email">
+                </dxg:GridColumn>
+                <dxg:GridColumn x:Name="IsNew" Visible="False" FieldName="IsNew"   Header="UseOrNotUsed" />
+                <dxg:GridColumn x:Name="IsUpdate" Visible="False" FieldName="IsUpdate"   Header="UseOrNotUsed" />
+                <dxg:GridColumn x:Name="UseOrNotUsed" Visible="False" FieldName="UseOrNotUsed"   Header="UseOrNotUsed" />
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.View>
+                <dxg:TableView 
+                    AllowPaging="True"
+                    NewItemRowPosition="Top"
+                    ShowCheckBoxSelectorColumn="True"
+                    EnterMoveNextColumn="True"
+                    VerticalScrollbarVisibility="Hidden"
+                    AutoWidth="True">
+                    <!--<dxmvvm:Interaction.Behaviors>
+                        <dxmvvm:EventToCommand Command="{Binding EditValueUser}"   EventName="CellValueChanged" PassEventArgsToCommand="True"/>
+                    </dxmvvm:Interaction.Behaviors>-->
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxmvvm:EventToCommand Command="{Binding ListUserEditValueChanging}"   EventName="EditValueChanging" PassEventArgsToCommand="True"/>
+                    </dxmvvm:Interaction.Behaviors>
+                </dxg:TableView>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+
+    </Grid>
+</UserControl>
